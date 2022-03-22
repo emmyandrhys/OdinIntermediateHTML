@@ -22,9 +22,9 @@
 		</div>
 		<div id="right">
 			<div id="top">
-				<h2>This is not a real online service! You know you need something like this in your life to help
-					you realize your deepest dreams. <br>Sign up <em>now</em> to get started.</h2>
-				<h2>You <em>know</em> you want to.</h2>
+				<h3>This is not a real online service! You know you need something like this in your life to help
+					you realize your deepest dreams. <br>Sign up <em>now</em> to get started.</h3>
+				<h3>You <em>know</em> you want to.</h3>
 			</div>
 			<form action="submit" onsubmit="allowSubmit" method="post">
 				<div id="form">
@@ -123,11 +123,9 @@ function addError(elem){
 			removeError(formInfo[q].field)}
 		}//phone
 		if(q==3){
-			let num="";
-			for (char of formInfo[3].field.value){
-				if (char==='/\d/'){ num.join(char)}
-			} console.log(num)
-			if (num.length>10){
+			let num=0;
+			let regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+			if(regex.test(formInfo[3].field.value)){
 				formInfo[3].valid==true;
 				removeError(formInfo[3].field)
 			} else {addError(formInfo[3].field);
@@ -151,6 +149,12 @@ function addError(elem){
 
 
 	function allowSubmit(){
+		checkInput(0);
+		checkInput(1);
+		checkInput(2);
+		checkInput(3);
+		checkInput(4);
+		checkInput(5);
 		for (item of formInfo){ 
 			if(!item.valid){
 				submit.classList.add('error');
