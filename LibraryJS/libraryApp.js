@@ -32,6 +32,7 @@ const displayLibraryShelf = () => {
 		const bookElement = document.createElement('div');
 		bookElement.id = `book-${book.idNum}`;
 		bookElement.classList.add('book_card');
+		bookElement.
 		const bookTitle = document.createElement('h2');
 		bookTitle.classList.add('book_title');
 		bookTitle.innerText = `${book.title}`;
@@ -41,23 +42,31 @@ const displayLibraryShelf = () => {
 		const bookPages = document.createElement('h3');
 		bookPages.classList.add('book_pages');
 		bookPages.innerText = `${book.pages} pages`;
+		
 		const bookRead = document.createElement('btn');
 		bookRead.classList.add('book_read');
 		if (book.read){
 			bookRead.innerText = 'been read';
-			bookRead.classList.add = 'read_true';
+			bookRead.classList.add('read_true');
 		}
 		else {
 			bookRead.innerText = 'not read';
 			bookRead.classList = 'read_false';
 		}
-		bookRead.addEventListener('click',handle book read) )
-
-
+		bookRead.addEventListener('click',function(){
+			let bookId = this.target.getAttribute('id').substring(5);
+			if(!myLibrary[bookId][read]){
+				this.target.innerText = 'been read';
+				this.target.classList.add('read_true');
+				this.target.classList.remove('read_false');
+				myLibrary[bookId][read] = true;
+			} 
+		});
 
 		const bookRemove = document.createElement('btn');
 		bookRemove.classList.add('remove_book');
 		bookRemove.innerText = 'Remove Book';
+		bookRemove.addEventListener('click', removeBookfromLibrary)
 		bookElement.appendChild(bookTitle);
 		bookElement.appendChild(bookAuthor);
 		bookElement.appendChild(bookPages)
