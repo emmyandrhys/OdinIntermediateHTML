@@ -45,6 +45,7 @@ const displayLibraryShelf = () => {
 		
 		const bookRead = document.createElement('btn');
 		bookRead.classList.add('book_read');
+		bookRead.id = `read-${book.idNum}`;
 		if (book.read){
 			bookRead.innerText = 'been read';
 			bookRead.classList.add('read_true');
@@ -65,8 +66,17 @@ const displayLibraryShelf = () => {
 
 		const bookRemove = document.createElement('btn');
 		bookRemove.classList.add('remove_book');
+		bookRead.id = `remove-${book.idNum}`;
 		bookRemove.innerText = 'Remove Book';
-		bookRemove.addEventListener('click', removeBookfromLibrary)
+		bookRemove.addEventListener('click', function(){
+			let bookId = this.target.getAttribute('id').substring(7);
+			//book removal confirmation modal
+			//if no, break
+			//if yes, remove book
+			this.parentElement.remove();
+			myLibrary.splice(bookId, 1)
+		})
+
 		bookElement.appendChild(bookTitle);
 		bookElement.appendChild(bookAuthor);
 		bookElement.appendChild(bookPages)
