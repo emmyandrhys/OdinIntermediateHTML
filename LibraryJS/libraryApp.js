@@ -27,8 +27,13 @@ class Book {
 };
 
 const displayLibraryShelf = () => {
-	let libraryShelf = document.getElementById('#shelf');
+	const libraryShelf = document.getElementById('shelf');
 	myLibrary.forEach((book) => {
+		libraryShelf.appendChild(makeBookCard(book))
+	})
+}
+
+function makeBookCard(book){
 		const bookElement = document.createElement('div');
 		bookElement.id = `book-${book.idNum}`;
 		bookElement.classList.add('book_card');
@@ -42,7 +47,7 @@ const displayLibraryShelf = () => {
 		const bookPages = document.createElement('h3');
 		bookPages.classList.add('book_pages');
 		bookPages.innerText = `${book.pages} pages`;
-		
+
 		const bookRead = document.createElement('btn');
 		bookRead.classList.add('book_read');
 		bookRead.id = `read-${book.idNum}`;
@@ -61,7 +66,7 @@ const displayLibraryShelf = () => {
 				this.target.classList.add('read_true');
 				this.target.classList.remove('read_false');
 				myLibrary[bookId][read] = true;
-			} 
+			}
 		});
 
 		const bookRemove = document.createElement('btn');
@@ -83,5 +88,4 @@ const displayLibraryShelf = () => {
 		bookElement.appendChild(bookRead);
 		bookElement.appendChild(bookRemove);
 		libraryShelf.appendChild(bookElement)
-	})
-}
+	}
