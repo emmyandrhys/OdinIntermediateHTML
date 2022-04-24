@@ -40,7 +40,7 @@ function createBookCard(book){
 	const bookPages = document.createElement('h3');
 	bookPages.classList.add('book_pages');
 	bookPages.innerText = `${book.pages} pages`;
-	
+
 	const bookRead = document.createElement('btn');
 	bookRead.classList.add('book_read');
 	bookRead.id = `read-${book.idNum}`;
@@ -59,7 +59,7 @@ function createBookCard(book){
 			this.target.classList.add('read_true');
 			this.target.classList.remove('read_false');
 			myLibrary[bookId][read] = true;
-		} 
+		}
 	});
 
 	const bookRemove = document.createElement('btn');
@@ -84,6 +84,26 @@ function createBookCard(book){
 	return bookElement
 }
 
+//title case function for formatting title and author input
+function titleCase(str){
+	str = str.toLowerCase();
+	let words = str.split(/\b/);
+	if (words[0].length > 1) {
+		var titled = words[0][0].toUpperCase() + words[0].substring(1)
+	} else {
+		var titled = words[0].toUpperCase();
+	}
+	for (let n = 1; n < words.length; n++){
+		if (words[n] === 'a' || words[n] === 'an' || words[n] === 'the' || words[n] === 'and'){
+			titled += ' ' + words[n]
+		} else if (words[n].length > 1){
+			titled += ' ' + words[n][0].toUpperCase() + words[n].substring(1)
+		} else {
+			titled += ' ' + words[n].toUpperCase()
+		}
+	} return titled;
+}
+
 //render book tiles to shelf
 const libraryShelf = document.getElementById('shelf');
 myLibrary.forEach((book) => {
@@ -94,6 +114,7 @@ myLibrary.forEach((book) => {
 const addBookBtn = document.getElementById('add-book-btn');
 const form  = document.getElementById('add-book');
 const dupBook = document.getElementById('duplicate-book-warning');
+const needInfo = document.getElementById('need-info-warning');
 addBookBtn.addEventListener('click',()=>form.style='display:flex')
 
 
@@ -104,18 +125,32 @@ form.addEventListener('submit', (event) => {
 	let formAuthor = form.elements['author'];
 	let formPages = form.elements['pages'];
 	let formRead = form.elements['read'];
-	
+
+  //check for missing fields in the form data
+	if (formAuthor ==='' || formTitle === ''){
+		needInfo.style = 'display: flex'
+		event.preventDefault();
+	} if (formPages<1 || Math.round(formPages) != formPages) {
+		needInfo.style = 'display: flex'
+		event.preventDefault();
+	} if (formRead != true || formRead != false) {
+		needInfo.style = 'display: flex'
+		event.preventDefault()
+	}
+	//format title and author name in title case
+	formTitle = titleCase(formTitle);
+	formAuthor = titleCase(formAuthor);
+
 	//check for duplicate books in library
 	for (let book of myLibrary){
 		if (formTitle === book.title && formAuthor === book.author){
 			dupBook.style = 'display: flex'
 			form.style = 'display:none';
+			event.preventDefault()
+			break;
 		}
 	}
-
-	//stop form data from being added to database
-	event.preventDefault();
-
 	//allow form data to update database
-	form.submit()
+	let newBook = new Book(formTitle, formAuthor, formPages, formRead);
+	Book.addBookToLibrary(newBook);
 });
