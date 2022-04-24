@@ -120,12 +120,13 @@ addBookBtn.addEventListener('click',()=>form.style='display:block')
 //grab data from form to add books to database
 form.addEventListener('submit', (event) => {
   // handle the form data
-	let formData = document.getElementById('add-book').elements;
-	let formTitle = formData['title'].value;
-	let formAuthor = formData['author'].value;
-	let formPages = formData['pages'].value;
-	let formReadTrue = formData['read'].value;
-	console.log(formData)
+	let formData = document.getElementById('add-book').elements
+	let formTitle = formData[0].value;
+	let formAuthor = formData[1].value;
+	let formPages = formData[2].value;
+	let formReadYes = formData[3].checked;
+	let formReadNo = formData[4].checked;
+	console.log(formReadYes, formReadNo)
 
   //check for missing fields in the form data
 	if (formAuthor ==='' || formTitle === ''){
@@ -136,7 +137,7 @@ form.addEventListener('submit', (event) => {
 		needInfo.style = 'display: block'
 
 		event.preventDefault();
-	} if (formRead != true || formRead != false) {
+	} if (formReadYes != true && formReadNo != true) {
 		needInfo.style = 'display: block'
 		needInfo.innerText = '<h2>formRead causing error</h2>'
 
@@ -155,6 +156,9 @@ form.addEventListener('submit', (event) => {
 			break;
 		}
 	}
+	if(formReadYes) {
+		let formRead = true;
+	} else { let formRead = false }
 	//allow form data to update database
 	let newBook = new Book(formTitle, formAuthor, formPages, formRead);
 	Book.addBookToLibrary(newBook);
