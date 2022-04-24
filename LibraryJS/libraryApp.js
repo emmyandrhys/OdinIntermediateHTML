@@ -115,26 +115,31 @@ const addBookBtn = document.getElementById('add-book-btn');
 const form  = document.getElementById('add-book');
 const dupBook = document.getElementById('duplicate-book-warning');
 const needInfo = document.getElementById('need-info-warning');
-addBookBtn.addEventListener('click',()=>form.style='display:flex')
-
+addBookBtn.addEventListener('click',()=>form.style='display:block')
 
 //grab data from form to add books to database
 form.addEventListener('submit', (event) => {
-    // handle the form data
-	let formTitle = form.elements['title'];
-	let formAuthor = form.elements['author'];
-	let formPages = form.elements['pages'];
-	let formRead = form.elements['read'];
+  // handle the form data
+	let formData = document.getElementById('add-book').elements;
+	let formTitle = formData['title'].value;
+	let formAuthor = formData['author'].value;
+	let formPages = formData['pages'].value;
+	let formReadTrue = formData['read'].value;
+	console.log(formData)
 
   //check for missing fields in the form data
 	if (formAuthor ==='' || formTitle === ''){
-		needInfo.style = 'display: flex'
+		needInfo.style = 'display: block'
+		needInfo.innerText = '<h2>formAuthor or formTitle causing error</h2>'
 		event.preventDefault();
 	} if (formPages<1 || Math.round(formPages) != formPages) {
-		needInfo.style = 'display: flex'
+		needInfo.style = 'display: block'
+
 		event.preventDefault();
 	} if (formRead != true || formRead != false) {
-		needInfo.style = 'display: flex'
+		needInfo.style = 'display: block'
+		needInfo.innerText = '<h2>formRead causing error</h2>'
+
 		event.preventDefault()
 	}
 	//format title and author name in title case
@@ -144,7 +149,7 @@ form.addEventListener('submit', (event) => {
 	//check for duplicate books in library
 	for (let book of myLibrary){
 		if (formTitle === book.title && formAuthor === book.author){
-			dupBook.style = 'display: flex'
+			dupBook.style = 'display: block'
 			form.style = 'display:none';
 			event.preventDefault()
 			break;
@@ -153,4 +158,5 @@ form.addEventListener('submit', (event) => {
 	//allow form data to update database
 	let newBook = new Book(formTitle, formAuthor, formPages, formRead);
 	Book.addBookToLibrary(newBook);
+	libraryShelf.appendChild(createBookCard(newBook))
 });
