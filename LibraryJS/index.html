@@ -23,6 +23,7 @@ body {
 
 		</div>
 		<form id="add-book" style="display: none">
+			<img src=".\assets\x_out.svg" alt="close dialog" />
 			<label for="title">Title:</label><input type="text" name="title" id="title">
 			<label for="author">Author:</label><input type="text" name="author" id="author">
 			<label for="pages">Number of Pages:</label><input type="number" name="pages" id="pages">
@@ -33,9 +34,11 @@ body {
 			<input type="submit" value="Add Book">
 		</form>
 		<div id="duplicate-book-warning" class="modal hidden">
+			<img src=".\assets\x_out.svg" alt="close dialog" height="64" width="64" />
 			<h2>You can't add a book already in the library.</h2>
 		</div>
 		<div id="need-info-warning" class="modal hidden">
+			<img src=".\assets\x_out.svg" alt="close dialog" height="64" width="64" />
 			<h2>All fields are required to add a book to the library.</h2>
 		</div>
 	</div>
