@@ -133,15 +133,16 @@ form.addEventListener('submit', (event) => {
 		needInfo.style = 'display: block'
 		needInfo.innerText = '<h2>formAuthor or formTitle causing error</h2>'
 		event.preventDefault();
+		return;
 	} if (formPages<1 || Math.round(formPages) != formPages) {
-		needInfo.style = 'display: block'
-
+		needInfo.classList.remove('hidden')
 		event.preventDefault();
+		return;
 	} if (formReadYes != true && formReadNo != true) {
 		needInfo.style = 'display: block'
 		needInfo.innerText = '<h2>formRead causing error</h2>'
-
-		event.preventDefault()
+		event.preventDefault();
+		return;
 	}
 	//format title and author name in title case
 	formTitle = titleCase(formTitle);
@@ -150,17 +151,19 @@ form.addEventListener('submit', (event) => {
 	//check for duplicate books in library
 	for (let book of myLibrary){
 		if (formTitle === book.title && formAuthor === book.author){
-			dupBook.style = 'display: block'
-			form.style = 'display:none';
+			dupBook.classList.remove('hidden')
+			form.classList.add('hidden')
 			event.preventDefault()
+			return;
 			break;
 		}
-	}
+	} let formRead = false;
 	if(formReadYes) {
-		let formRead = true;
-	} else { let formRead = false }
+		formRead = true;
+	}
 	//allow form data to update database
 	let newBook = new Book(formTitle, formAuthor, formPages, formRead);
-	Book.addBookToLibrary(newBook);
+	newBook.addBookToLibrary();
 	libraryShelf.appendChild(createBookCard(newBook))
+	event.preventDefault();
 });
