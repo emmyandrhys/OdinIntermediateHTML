@@ -18,12 +18,13 @@
   color: #EAF2F8;
   border-radius: 5px;
   padding: 5%;
+  display: grid;
+  grid-template-rows: 30% 25% 15% 15% 15%;
+  align-items: center;
 }
-
-.book_card > {
-
+.remove_book {
+  justify-self: end;
 }
-
 .modal {
   display: grid;
   grid-template-rows: 10% 20% 20% 20% 20% 10%;

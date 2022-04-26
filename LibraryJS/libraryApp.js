@@ -45,11 +45,11 @@ function createBookCard(book){
 	bookRead.classList.add('book_read');
 	bookRead.id = `read-${book.idNum}`;
 	if (book.read){
-		bookRead.innerText = 'been read';
+		bookRead.innerText = 'Book has been read';
 		bookRead.classList.add('read_true');
 	}
 	else {
-		bookRead.innerText = 'not read';
+		bookRead.innerText = "Book hasn't been read";
 		bookRead.classList = 'read_false';
 	}
 	bookRead.addEventListener('click',function(){
@@ -67,12 +67,18 @@ function createBookCard(book){
 	bookRead.id = `remove-${book.idNum}`;
 	bookRemove.innerText = 'Remove Book';
 	bookRemove.addEventListener('click', function(){
-		let bookId = this.target.getAttribute('id').substring(7);
+		let bookId = this.id.substring(7);
 		//book removal confirmation modal
+		removalConfirm.classList.remove('hidden');
+		const confirmRemove = document.getElementById('confirm-remove');
+		const cancelRemove = document.getElementById('cancel-remove');
+		confirmRemove.addEventListener('click',()=>{
+			//if yes, remove book
+			myLibrary.splice(bookId, 1);
+			removalConfirm.classList.add('hidden');
+		})
 		//if no, break
-		//if yes, remove book
-		this.parentElement.remove();
-		myLibrary.splice(bookId, 1)
+		cancelRemove.addEventListener('click',bookRemove.classList.add('hidden'))
 	})
 
 	bookElement.appendChild(bookTitle);
@@ -112,7 +118,7 @@ myLibrary.forEach((book) => {
 
 const closeBtns = document.querySelectorAll('.close-btn');
 closeBtns.forEach((btn)=>{btn.addEventListener('click', (e) => e.target.parentElement.classList.add('hidden'))})
-
+const removalConfirm = document.getElementById('book-removal-warning')
 const addBookBtn = document.getElementById('add-book-btn');
 const form  = document.getElementById('add-book');
 const formModal = document.getElementById('book-form')
