@@ -24,10 +24,6 @@ class Book {
 		myLibrary.push(newBook);
 		return;
 	}
-	removeBookFromLibrary() {
-		myLibrary.splice(this.idNum, 1);
-		return
-	}
 };
 
 const closeBtns = document.querySelectorAll('.close-btn');
@@ -40,16 +36,19 @@ const dupBook = document.getElementById('duplicate-book-warning');
 const needInfo = document.getElementById('need-info-warning');
 addBookBtn.addEventListener('click',()=>formModal.classList.remove('hidden'))
 
-function removeBook(book){
+function removeBook(e){
+	//get book to be removed
+	let targetId = e.target.id;
+	let book = targetId.substring(6);
 	//book removal confirmation modal
 	removalConfirm.classList.remove('hidden');
 	const confirmRemove = document.getElementById('confirm-remove');
 	const cancelRemove = document.getElementById('cancel-remove');
 	//if yes, remove book
-	confirmRemove.addEventListener('click',(book)=>{
-		book.removeBookFromLibrary()
+	confirmRemove.addEventListener('click',function(){
 		removalConfirm.classList.add('hidden')
-		book.parentElement.remove()
+		let removedBook = document.getElementById(`book-${book}`)
+		removeBook.classList.add('hidden')
 	})
 	//if no, break
 	cancelRemove.addEventListener('click',removalConfirm.classList.add('hidden'))
@@ -97,7 +96,7 @@ function createBookCard(book){
 	bookRemove.classList.add('remove_book');
 	bookRead.id = `remove-${book.idNum}`;
 	bookRemove.innerText = 'Remove Book';
-	bookRemove.addEventListener('click', removeBook(book))
+	bookRemove.addEventListener('click', removeBook)
 
 	bookElement.appendChild(bookTitle);
 	bookElement.appendChild(bookAuthor);
