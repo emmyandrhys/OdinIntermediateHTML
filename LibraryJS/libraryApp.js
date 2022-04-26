@@ -28,30 +28,37 @@ class Book {
 
 const closeBtns = document.querySelectorAll('.close-btn');
 closeBtns.forEach((btn)=>{btn.addEventListener('click', (e) => e.target.parentElement.classList.add('hidden'))})
-const removalConfirm = document.getElementById('book-removal-warning')
 const addBookBtn = document.getElementById('add-book-btn');
 const form  = document.getElementById('add-book');
-const formModal = document.getElementById('book-form')
+const formModal = document.getElementById('book-form');
 const dupBook = document.getElementById('duplicate-book-warning');
 const needInfo = document.getElementById('need-info-warning');
-addBookBtn.addEventListener('click',()=>formModal.classList.remove('hidden'))
+addBookBtn.addEventListener('click',()=>formModal.classList.remove('hidden'));
+const removalConfirm = document.getElementById('book-removal-warning');
+
 
 function removeBook(e){
-	//get book to be removed
-	let targetId = e.target.id;
-	let book = targetId.substring(6);
 	//book removal confirmation modal
-	removalConfirm.classList.remove('hidden');
 	const confirmRemove = document.getElementById('confirm-remove');
 	const cancelRemove = document.getElementById('cancel-remove');
+	//get book to be removed
+	let targetId = e.target.id;
+	let book = e.target.id.substring(6);
+	confirmRemove.id = book;
+
 	//if yes, remove book
-	confirmRemove.addEventListener('click',function(){
-		removalConfirm.classList.add('hidden')
-		let removedBook = document.getElementById(`book-${book}`)
+	confirmRemove.addEventListener('click',function(e){
+		confirmBookRemoval();
+		let removedBook = document.getElementById(`book-${e.target.id}`);
 		removeBook.classList.add('hidden')
 	})
 	//if no, break
 	cancelRemove.addEventListener('click',removalConfirm.classList.add('hidden'))
+	confirmRemove.id = 'confirm-remove';
+}
+
+function confirmBookRemoval(){
+	removalConfirm.classList.add('hidden')
 }
 
 
@@ -96,7 +103,25 @@ function createBookCard(book){
 	bookRemove.classList.add('remove_book');
 	bookRead.id = `remove-${book.idNum}`;
 	bookRemove.innerText = 'Remove Book';
-	bookRemove.addEventListener('click', removeBook)
+	// bookRemove.addEventListener('click', function(e){
+	// 	//book removal confirmation modal
+	// 	const removalConfirm = document.getElementById('book-removal-warning')
+	// 	removalConfirm.classList.remove('hidden');
+	// 	const confirmRemove = document.getElementById('confirm-remove');
+	// 	const cancelRemove = document.getElementById('cancel-remove');
+	// 	//get book to be removed
+	// 	let targetId = e.target.id;
+	// 	let book = e.target.id.substring(6);
+	
+	// 	//if yes, remove book
+	// 	confirmRemove.addEventListener('click',function(){
+	// 		removalConfirm.classList.add('hidden')
+	// 		let removedBook = document.getElementById(`book-${book}`)
+	// 		removeBook.classList.add('hidden')
+	// 	})
+	// 	//if no, break
+	// 	cancelRemove.addEventListener('click',removalConfirm.classList.add('hidden'))
+	// })
 
 	bookElement.appendChild(bookTitle);
 	bookElement.appendChild(bookAuthor);
@@ -180,3 +205,7 @@ form.addEventListener('submit', (event) => {
 	libraryShelf.appendChild(createBookCard(newBook))
 	event.preventDefault();
 })
+
+const removeBookButtons = document.querySelectorAll('.remove_book');
+removeBookButtons.forEach((book)=> book.addEventListener('click', removeBook))
+removeBookButtons.forEach((book)=> book.addEventListener('click', ()=>removalConfirm.classList.remove('hidden')))
