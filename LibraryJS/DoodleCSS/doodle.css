@@ -1,5 +1,10 @@
 .header {
   background-color: #A569BD;
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
 }
 
 .shelf {
@@ -14,12 +19,14 @@
   border-radius: 5px;
   padding: 5%;
 }
+
 .book_card > {
 
 }
 
 .modal {
-  display: block;
+  display: grid;
+  grid-template-rows: 10% 20% 20% 20% 20% 10%;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -28,9 +35,20 @@
   max-width: 100%;
   height: 400px;
   max-height: 100%;
+  background-color: #2980B9;
+  padding: 10px;
+  border-radius: 10px;
 }
+
+form, form * {
+  background-color: #A9CCE3;
+}
+
 .hidden {
   display: none;
+}
+.close-btn {
+  justify-self: end;
 }
 
 .button {
@@ -45,7 +63,7 @@
 }
 
 .doodle {
-  background-color: #D0ECE7;
+  background-color: #A9CCE3;
   color: #3c3c3c;
 }
 
@@ -71,14 +89,17 @@
 }
 
 .doodle label {
-  padding: 0.25em 0px;
+  padding:  0px 5px 0px 10px;
   display: inline-block;
+  font-size: larger;
 }
 
 .doodle fieldset, .doodle textarea {
   border-style: solid;
   border-width: 10px 10px 10px 10px;
   border-image: url(./assets/border.svg) 10 10 10 10 stretch stretch;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .doodle .border, .doodle-border {
@@ -91,10 +112,12 @@
   border-style: solid;
   border-width: 10px 10px 10px 10px;
   border-image: url(./assets/button.svg) 10 10 10 10 stretch stretch;
+  margin: 10px;
 }
 
-.doodle button {
+.doodle button, .submit {
   text-align: center;
+  background-color: #7986CB;
 }
 
 .doodle input[type="color"] {
@@ -160,7 +183,6 @@
 }
 
 .doodle button, .doodle textarea, .doodle input, .doodle select {
-  background-color: unset;
   font-family: 'Short Stack', cursive;
   font-size: 1em;
   color: #3c3c3c;

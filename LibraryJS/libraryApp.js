@@ -110,12 +110,15 @@ myLibrary.forEach((book) => {
 	libraryShelf.appendChild(createBookCard(book))
 	})
 
+const closeBtns = document.querySelectorAll('.close-btn');
+closeBtns.forEach((btn)=>{btn.addEventListener('click', (e) => e.target.parentElement.classList.add('hidden'))})
 
 const addBookBtn = document.getElementById('add-book-btn');
 const form  = document.getElementById('add-book');
+const formModal = document.getElementById('book-form')
 const dupBook = document.getElementById('duplicate-book-warning');
 const needInfo = document.getElementById('need-info-warning');
-addBookBtn.addEventListener('click',()=>form.style='display:block')
+addBookBtn.addEventListener('click',()=>formModal.classList.remove('hidden'))
 
 //grab data from form to add books to database
 form.addEventListener('submit', (event) => {
@@ -124,14 +127,12 @@ form.addEventListener('submit', (event) => {
 	let formTitle = formData[0].value;
 	let formAuthor = formData[1].value;
 	let formPages = formData[2].value;
-	let formReadYes = formData[3].checked;
-	let formReadNo = formData[4].checked;
-	console.log(formReadYes, formReadNo)
+	let formReadYes = formData[4].checked;
+	let formReadNo = formData[5].checked;
 
   //check for missing fields in the form data
 	if (formAuthor ==='' || formTitle === ''){
-		needInfo.style = 'display: block'
-		needInfo.innerText = '<h2>formAuthor or formTitle causing error</h2>'
+		needInfo.classList.remove('hidden')
 		event.preventDefault();
 		return;
 	} if (formPages<1 || Math.round(formPages) != formPages) {
@@ -139,8 +140,7 @@ form.addEventListener('submit', (event) => {
 		event.preventDefault();
 		return;
 	} if (formReadYes != true && formReadNo != true) {
-		needInfo.style = 'display: block'
-		needInfo.innerText = '<h2>formRead causing error</h2>'
+		needInfo.classList.remove('hidden')
 		event.preventDefault();
 		return;
 	}
