@@ -24,8 +24,8 @@ class Book {
 		myLibrary.push(newBook);
 		return;
 	}
-	removeBookFromLibrary(){
-
+	removeBookFromLibrary(id){
+		myLibrary.splice(id, 1);
 	}
 };
 
@@ -55,7 +55,7 @@ const removeBookModal = (e) => {
 	confirmRemove.setAttribute('data-idNum', e.target.getAttribute('data-idNum'));
 	//add event listeners for confirmation buttons
 	confirmRemove.addEventListener('click', removeBookConfirmation);
-	cancelRemove.addEventListener('click', () => { 
+	cancelRemove.addEventListener('click', () => {
 		confirmRemove.removeAttribute('data-idNum');
 		removeConfirmModal.classList.add('hidden');
 	});
@@ -71,12 +71,12 @@ const removeBookConfirmation = () => {
 	removeBookFromLibrary(book);
 }
 
-const bookRead = (e) => {
+const changeRead = (e) => {
 	let bookId = e.target.getAttribute('data-idNum');
-	if(e.target.classList.includes('read_false')){
-		e.target.innerText = 'been read';
-		e.target.classList.add('read_true');
-		e.target.classList.remove('read_false');
+	if(e.target.getAttribute('data-read') ==='false'){
+		e.target.innerText = 'Read book';
+		e.target.removeAttribute('data-read')
+		e.target.setAttribute('data-read','true');
 		myLibrary[bookId][read] = true;
 	}
 }
@@ -108,11 +108,11 @@ const createBookCard = (book) => {
 	bookRead.id = `read-${book.idNum}`;
 	bookRead.setAttribute('data-idNum',book.idNum)
 	if (book.read){
-		bookRead.innerText = 'Book has been read';
-		bookRead.classList.add('read_true');
+		bookRead.innerText = 'Read book.';
+		bookRead.setAttribute('data-read', 'true');
 	} else {
-		bookRead.innerText = "Book hasn't been read";
-		bookRead.classList = 'read_false';
+		bookRead.innerText = "Not read yet.";
+		bookRead.setAttribute('data-read', 'false');
 	}
 	//add event listener to toggle if book was read or not
 	bookRead.addEventListener('click',changeRead);
@@ -123,7 +123,7 @@ const createBookCard = (book) => {
 	bookRemove.innerText = 'Remove Book';
 	bookRemove.setAttribute('data-idNum',book.idNum);
 	//add event listener to remove book from libary
-	bookRemove.addEventListener('click', removeBook)
+	bookRemove.addEventListener('click', removeBookModal)
 	//append card components to card
 	bookElement.appendChild(bookTitle);
 	bookElement.appendChild(bookAuthor);
@@ -206,4 +206,5 @@ form.addEventListener('submit', (event) => {
 	newBook.addBookToLibrary();
 	libraryShelf.appendChild(createBookCard(newBook))
 	event.preventDefault();
+	formModal.classList.add('hidden')
 });
