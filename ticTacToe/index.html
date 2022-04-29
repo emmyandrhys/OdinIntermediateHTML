@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Tic-Tac-Toe</title>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Tic-Tac-Toe</h1>
+      <div id="player1" class="player-card">
+        <h2 class="player-name">
+          Player 1
+        </h2>
+        <div class="score">
+          <h3>Score:</h3>
+          <h2 id="player1-score">0</h2>
+        </div>
+      </div>
+      <div id="player2" class="player-card">
+        <h2 class="player-name">
+          Player 2
+        </h2>
+        <div class="score">
+          <h3>Score:</h3>
+          <h2 id="player2-score">0</h2>
+        </div>
+      </div>
+    </div>
+    <div class="game-container">
+      <div class="game-board">
+        <!-- Use Grid to layout 9 squares, 3 x 3, and fill them with script -->
+      </div>
+      <div id="get-players" class="modal">
+        <h1>Who is playing Tic-Tac-Toe today?</h1>
+        <form class="get-players" action="index.html" method="post">
+          <label for="player1-name">Player 1's Name:</label>
+          <input type="text" name="player1-name" value="">
+          <label for="player2-name">Player 2's Name:</label>
+          <input type="text" name="player2-name" value="">
+          <button type="submit" name="submit-button">Start Playing</button>
+        </form>
+      </div>
+      <div class="model" id="play-again">
+        <h1 id="winner"><span id='round-winner'>Player?</span> Wins the Round!</h1>
+        <h2><span id="first=place-name">Player?</span> is currently winning the game with a score of <span id="first-place-score">?</span>!</h2>
+        <h2><span id="second-place-name">Player?</span> has a score of <span id="second-place-score">?</span>.</h2>
+        <h2>Do you want to play again?</h2>
+        <button type="button" name="play-again" value="true">Yes, play again.</button>
+        <button type="button" name="all-done" value="false">No, we're all done.</button>
+      </div>
+      <div class="modal" id="final-score-modal">
+        <h1><span id="first-place-name">Player?</span> wins the game with a final score of <span id="first-place-score">?</span> to <span>?</span>!</h1>
+      </div>
+      <div class="modal" id="cat-game">
+        <h1>Uh-oh! It's a Cat's Game!  No one wins this round.</h1>
+        <h1>The current score is <span id="first-place-score">?</span> to <span id="second-place-score">?</span> with <span id="first-place-name">Player?</span> in the lead.</h1>
+        <h2>Do you want to play again?</h2>
+        <button type="button" name="play-again" value="true">Yes, play again.</button>
+        <button type="button" name="all-done" value="false">No, we're all done.</button>
+      </div
+      <div class="modal" id="tie-play-again">
+        <h1 id="winner"><span id='round-winner'>Player?</span> Wins the Round!</h1>
+        <h2>The game is currently tied with both players having <span id=first-place-score">?</span> wins!</h2>
+        <h2>Do you want to play again?</h2>
+        <button type="button" name="play-again" value="true">Yes, play again.</button>
+        <button type="button" name="all-done" value="false">No, we're all done.</button>
+      </div>
+      <div class="modal" id="cat-game-tie">
+        <h1>Uh-oh! It's a Cat's Game!  No one wins this round.</h1>
+        <h2>The game is currently tied with both players having <span id=first-place-score">?</span> wins!</h2>
+        <h2>Do you want to play again?</h2>
+        <button type="button" name="play-again" value="true">Yes, play again.</button>
+        <button type="button" name="all-done" value="false">No, we're all done.</button>
+      </div>
+      <div class="modal" id="final-score-tie">
+
+      </div>
+    </div>
+  </body>
+</html>
