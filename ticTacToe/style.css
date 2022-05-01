@@ -3,24 +3,53 @@ body {
     grid-template-columns: 1fr 5fr;
     height: 100vh;
 }
+*{
+  box-sizing: border-box;
+}
 .header {
     grid-column: 1;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-around;
     align-items: center;
+    background-color: #83C182;
+}
+.player-card {
+  text-align: center;
+  padding:.5rem;
+  background-color: #547B53;
+  border-radius: .5rem;
+}
+.player-card * {
+  margin: .1rem;
 }
 .game-container {
     grid-column: 2;
-    display: flex;
+    display: grid;
+    grid: 1fr fit-content(90%) 1fr/1fr fit-content(90%) 1fr;
     justify-content: center;
     align-items: center;
+    background-color: #dddddd;
 }
 .game-board {
+    grid-column: 2;
+    grid-row: 2;
     display: grid;
     grid: 1fr 1fr 1fr/ 1fr 1fr 1fr;
-    gap: 2%;
+    place-items: center;
+    background-color: #DDDDDD;
+    margin:1rem;
+    padding: .5rem;
+    border: 2rem solid #A29192;
+    box-sizing: border-box;
+}
+.game-square{
+  height: 12rem;
+  width:12rem;
+  background-color: #A29192;
+  border: .5rem solid #DDDDDD;
 }
 .modal {
     display: none;
+    background-color: #B02E0C;
 }
