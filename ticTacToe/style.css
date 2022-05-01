@@ -1,0 +1,26 @@
+body {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    height: 100vh;
+}
+.header {
+    grid-column: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.game-container {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.game-board {
+    display: grid;
+    grid: 1fr 1fr 1fr/ 1fr 1fr 1fr;
+    gap: 2%;
+}
+.modal {
+    display: none;
+}
