@@ -36,8 +36,19 @@ const playerFactory = (name, icon, score=0) => {
 }
 
 //module to create gameboard
-//eventlisteners to each squares
-//display appropriate image for turn
+const gameBoard = (() => {
+  const board = document.getElementById('game-board');
+  let x = 1;
+  //create 9 squares in board
+  while (x < 10){
+    let square = board.createElement('div');
+    square.classList.add('game-square');
+    square.setAttribute('id', `${x}`);
+    //eventlisteners to each squares
+    square.addEventListener('click', match);
+    board.appendChild(square);
+  }
+}
 
 //game tracking function
 //call match function
@@ -47,10 +58,18 @@ const playerFactory = (name, icon, score=0) => {
 //call modal at end of match and end of game
 
 //match tracking function
+const match = () => {
+while (true){
 //keeps track of turn
 //places icon in square as clicked
-//determines if match is over or not.
+//display appropriate image for turn
+
+//records move in player object (which checks for win)
+player.recordMove(play)? break:false;
+}
 //passes winner (or lack of) to game fucntion
+game(player)
+}
 
 //new game modal fucntion
 //display modal
