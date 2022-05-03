@@ -35,21 +35,6 @@ const playerFactory = (name, icon, score=0) => {
   return { recordMove, recordNewRound, resetPlayer, getName, getScore, getIcon }
 }
 
-//module to create gameboard
-const gameBoard = (() => {
-  const board = document.getElementById('game-board');
-  let x = 1;
-  //create 9 squares in board
-  while (x < 10){
-    let square = board.createElement('div');
-    square.classList.add('game-square');
-    square.setAttribute('id', `${x}`);
-    //eventlisteners to each squares
-    square.addEventListener('click', match);
-    board.appendChild(square);
-  }
-}
-
 //game tracking function
 //call match function
 //keep track of score
@@ -58,17 +43,17 @@ const gameBoard = (() => {
 //call modal at end of match and end of game
 
 //match tracking function
-const match = () => {
-while (true){
-//keeps track of turn
-//places icon in square as clicked
-//display appropriate image for turn
+const match = (e) => {
+  if (document.querySelectorAll('.hidden').length === 7){
+    let x = false;
+    while (x === false){
+      let square = e.target;
+      let play = square.id;
 
-//records move in player object (which checks for win)
-player.recordMove(play)? break:false;
-}
+    }
 //passes winner (or lack of) to game fucntion
-game(player)
+//game(player)
+  }
 }
 
 //new game modal fucntion
@@ -88,3 +73,25 @@ game(player)
 //displays score and player name in modal
 //adds eventlisteners to buttons
 //calls new game function or closes
+
+//module to create gameboard
+const gameBoard = (() => {
+  const buildBoard = () => {
+    const board = document.getElementById('game-board');
+    let x = 1;
+    //create 9 squares in board
+    while (x < 10){
+      let square = document.createElement('div');
+      square.classList.add('game-square');
+      square.setAttribute('id', `${x}`);
+      //eventlisteners to each squares
+      square.addEventListener('click', match);
+      board.appendChild(square);
+      x += 1;
+    } return;
+  }
+  const squareImages = (player1, player2) => {
+
+  } return {buildBoard, squareImages}
+})();
+gameBoard.buildBoard;

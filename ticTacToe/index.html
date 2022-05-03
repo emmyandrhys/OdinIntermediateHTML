@@ -33,17 +33,8 @@
     <div class="game-container">
       <div id="game-board" class="game-board">
         <!-- Use Grid to layout 9 squares, 3 x 3, and fill them with script -->
-        <div class="game-square"></div>
-        <div class="game-square"></div>
-        <div class="game-square"></div>
-        <div class="game-square"></div>
-        <div class="game-square"></div>
-        <div class="game-square"></div>
-        <div class="game-square"></div>
-        <div class="game-square"></div>
-        <div class="game-square"></div>
       </div>
-      <div id="get-players" class="modal">
+      <div id="get-players" class="modal hidden">
         <h1>Who is playing Tic-Tac-Toe today?</h1>
         <form class="get-players" action="index.html" method="post">
           <label for="player1-name">Player 1's Name:</label>
@@ -53,7 +44,7 @@
           <button type="submit" name="submit-button">Start Playing</button>
         </form>
       </div>
-      <div class="modal" id="play-again">
+      <div class="modal hidden" id="play-again">
         <h1 id="winner"><span id='round-winner'>Player?</span> Wins the Round!</h1>
         <h2><span id="first=place-name">Player?</span> is currently winning the game with a score of <span id="first-place-score">?</span>!</h2>
         <h2><span id="second-place-name">Player?</span> has a score of <span id="second-place-score">?</span>.</h2>
@@ -61,31 +52,31 @@
         <button type="button" name="play-again" value="true">Yes, play again.</button>
         <button type="button" name="all-done" value="false">No, we're all done.</button>
       </div>
-      <div class="modal" id="final-score-modal">
+      <div class="modal hidden" id="final-score-modal">
         <h1><span id="first-place-name">Player?</span> wins the game with a final score of <span id="first-place-score">?</span> to <span>?</span>!</h1>
       </div>
-      <div class="modal" id="cat-game">
+      <div class="modal hidden" id="cat-game">
         <h1>Uh-oh! It's a Cat's Game!  No one wins this round.</h1>
         <h1>The current score is <span id="first-place-score">?</span> to <span id="second-place-score">?</span> with <span id="first-place-name">Player?</span> in the lead.</h1>
         <h2>Do you want to play again?</h2>
         <button type="button" name="play-again" value="true">Yes, play again.</button>
         <button type="button" name="all-done" value="false">No, we're all done.</button>
       </div>
-      <div class="modal" id="tie-play-again">
+      <div class="modal hidden" id="tie-play-again">
         <h1 id="winner"><span id='round-winner'>Player?</span> Wins the Round!</h1>
         <h2>The game is currently tied with both players having <span id=first-place-score">?</span> wins!</h2>
         <h2>Do you want to play again?</h2>
         <button type="button" name="play-again" value="true">Yes, play again.</button>
         <button type="button" name="all-done" value="false">No, we're all done.</button>
       </div>
-      <div class="modal" id="cat-game-tie">
+      <div class="modal hidden" id="cat-game-tie">
         <h1>Uh-oh! It's a Cat's Game!  No one wins this round.</h1>
         <h2>The game is currently tied with both players having <span id=first-place-score">?</span> wins!</h2>
         <h2>Do you want to play again?</h2>
         <button type="button" name="play-again" value="true">Yes, play again.</button>
         <button type="button" name="all-done" value="false">No, we're all done.</button>
       </div>
-      <div class="modal" id="final-score-tie">
+      <div class="modal hidden" id="final-score-tie">
 
       </div>
     </div>
