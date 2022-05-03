@@ -74,10 +74,10 @@ const match = (e) => {
 //adds eventlisteners to buttons
 //calls new game function or closes
 
+const board = document.getElementById('game-board');
 //module to create gameboard
 const gameBoard = (() => {
-  const buildBoard = () => {
-    const board = document.getElementById('game-board');
+  const buildBoard = (board) => {
     let x = 1;
     //create 9 squares in board
     while (x < 10){
@@ -88,10 +88,21 @@ const gameBoard = (() => {
       square.addEventListener('click', match);
       board.appendChild(square);
       x += 1;
-    } return;
+    };
   }
   const squareImages = (player1, player2) => {
-
-  } return {buildBoard, squareImages}
+    const squares = Array.from(document.getElementsByClassName('game-square'));
+    squares.forEach((square) => {
+      let playerOne = document.createElement('img');
+      playerOne.setAttribute('src', player1.getIcon());
+      playerOne.classListplayerOne.classList.add('noshow');
+      square.appendChild(playerOne);
+      let playerTwo = document.createElement('img');
+      playerTwo.setAttribute('src', player2.getIcon());
+      playerTwo.classList.add('noshow');
+      square.appendChild(playerTwo);
+    })
+  };
+  return {buildBoard, squareImages}
 })();
-gameBoard.buildBoard;
+gameBoard.buildBoard(board);
