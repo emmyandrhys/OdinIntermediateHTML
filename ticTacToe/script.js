@@ -56,11 +56,44 @@ const match = (e) => {
   }
 }
 
-//new game modal fucntion
-//display modal
-//add eventlisteners
-//get player names and icons
-//call game function
+// grab all necessary elements for the DOM
+const board = document.getElementById('game-board');
+const p1nameHeader = document.getElementById('player-1-name');
+const p2nameHeader = document.getElementById('player-2-name');
+const p1scoreHeader = document.getElementById('player-1-score');
+const p2scoreHeader = document.getElementById('player-2-score');
+const getPlayersModal = document.getElementById('get-players');
+const form = document.getElementById('player-form');
+const playAgainModal = document.getElementById('play-again')
+const finalScoreModal = document.getElementById('final-score-modal');
+const catGameModal = document.getElementById('cat-game');
+const tiePlayAgainModal = document.getElementById('tie-play-again');
+const catGameTieModal = document.getElementById('cat-game-tie');
+const finalScoreTieModal = document.getElementById('final-score-tie');
+
+//new game modal function
+const newGame = () => {
+  //display modal
+  getPlayersModal.classList.remove('noshow');
+  //add eventlistener
+  form.addEventListener('submit', (event) => {
+    let formData = document.getElementById('player-form').elements;
+    //get player names and icons
+    let player1name = formData[0].value;
+    let player1icon = formData[1].value;
+    let player2name = formData[2].value;
+    let player2icon = formData[3].value;
+    //create player objects
+    const player1 = playerFactory(player1name, player1icon, 0);
+    const player2 = playerFactory(player2name, player2icon, 0);
+    getPlayersModal.classList.add('noshow');
+    //add images of html of board
+    gameBoard.squareImages(player1, player2)
+    //call game fucntion
+    return game(player1, player2)
+  })   
+}
+
 
 //end match modal function
 //displays appropriate modal for Score
@@ -74,7 +107,6 @@ const match = (e) => {
 //adds eventlisteners to buttons
 //calls new game function or closes
 
-const board = document.getElementById('game-board');
 //module to create gameboard
 const gameBoard = (() => {
   const buildBoard = (board) => {
@@ -106,3 +138,4 @@ const gameBoard = (() => {
   return {buildBoard, squareImages}
 })();
 gameBoard.buildBoard(board);
+newGame()

@@ -12,21 +12,21 @@
         <h1>Chick-Scratch-Crow</h1>
       </div>
       <div id="player1" class="player-card">
-        <h2 class="player-name">
+        <h2 id='player-1-name' class="player-name">
           Player 1
         </h2>
         <div class="score">
           <h3>Score:</h3>
-          <h2 id="player1-score">0</h2>
+          <h2 id="player-1-score">0</h2>
         </div>
       </div>
       <div id="player2" class="player-card">
-        <h2 class="player-name">
+        <h2 id='player-2-name' class="player-name">
           Player 2
         </h2>
         <div class="score">
           <h3>Score:</h3>
-          <h2 id="player2-score">0</h2>
+          <h2 id="player-2-score">0</h2>
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
       </div>
       <div id="get-players" class="modal hidden">
         <h1>Who is playing Tic-Tac-Toe today?</h1>
-        <form class="get-players" action="index.html" method="post">
+        <form id="player-form" class="get-players" action="index.html" method="post">
           <label for="player1-name">Player 1's Name:</label>
           <input type="text" name="player1-name" value="">
           <label for="player2-name">Player 2's Name:</label>
