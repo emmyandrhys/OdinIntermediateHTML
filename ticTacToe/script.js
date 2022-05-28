@@ -43,13 +43,16 @@ const playerFactory = (name, icon, score=0) => {
 //call modal at end of match and end of game
 
 //match tracking function
-const match = (e) => {
+const match = (e, turn) => {
+  //determine which player goes first for match
+
+
+  if (first != begun)
   if (document.querySelectorAll('.hidden').length === 7){
     let x = false;
     while (x === false){
       let square = e.target;
       let play = square.id;
-
     }
 //passes winner (or lack of) to game fucntion
 //game(player)
@@ -64,6 +67,7 @@ const p1scoreHeader = document.getElementById('player-1-score');
 const p2scoreHeader = document.getElementById('player-2-score');
 const getPlayersModal = document.getElementById('get-players');
 const form = document.getElementById('player-form');
+const SubmitButton = document.getElementById('submit-button')
 const playAgainModal = document.getElementById('play-again')
 const finalScoreModal = document.getElementById('final-score-modal');
 const catGameModal = document.getElementById('cat-game');
@@ -71,28 +75,9 @@ const tiePlayAgainModal = document.getElementById('tie-play-again');
 const catGameTieModal = document.getElementById('cat-game-tie');
 const finalScoreTieModal = document.getElementById('final-score-tie');
 
-//new game modal function
-const newGame = () => {
-  //display modal
-  getPlayersModal.classList.remove('noshow');
-  //add eventlistener
-  form.addEventListener('submit', (event) => {
-    let formData = document.getElementById('player-form').elements;
-    //get player names and icons
-    let player1name = formData[0].value;
-    let player1icon = formData[1].value;
-    let player2name = formData[2].value;
-    let player2icon = formData[3].value;
-    //create player objects
-    const player1 = playerFactory(player1name, player1icon, 0);
-    const player2 = playerFactory(player2name, player2icon, 0);
-    getPlayersModal.classList.add('noshow');
-    //add images of html of board
-    gameBoard.squareImages(player1, player2)
-    //call game fucntion
-    return game(player1, player2)
-  })   
-}
+
+
+
 
 
 //end match modal function
@@ -135,7 +120,30 @@ const gameBoard = (() => {
       square.appendChild(playerTwo);
     })
   };
-  return {buildBoard, squareImages}
+  //new game modal function
+  const newGame = () => {
+    //display modal
+    getPlayersModal.classList.remove('noshow');
+    //add eventlistener
+    form.addEventListener('click', function formInput() {
+      let formData = document.getElementById('player-form').elements;
+      //get player names and icons
+      let player1name = formData[0].value;
+      let player1icon = formData[1].value;
+      let player2name = formData[2].value;
+      let player2icon = formData[3].value;
+      //create player objects
+      const player1 = playerFactory(player1name, player1icon, 0);
+      const player2 = playerFactory(player2name, player2icon, 0);
+      //add images of html of board
+      squareImages(player1, player2)
+      //call game fucntion
+      game(player1, player2)
+      //hideModal(getPlayersModal);
+      getPlayersModal.classList.add('noshow');
+    })   
+  }
+  return {buildBoard, newGame, }
 })();
 gameBoard.buildBoard(board);
 newGame()
