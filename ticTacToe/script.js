@@ -1,8 +1,9 @@
 // const to check if there is a winner
-const winRound = [[1,2,3], [1,5,9], [1,4,7], [2,5,8], [3,6,9], [3,5,7], [4,5,6], [7, 8, 9]]
+const winRoundCheckRecords = [[1,2,3], [1,5,9], [1,4,7], [2,5,8], [3,6,9], [3,5,7], [4,5,6], [7, 8, 9]]
 
 //factory function to create players
 //include name, icon, plays, Score
+//return functions: recordMove, resetPlayer, recordNewRound, getName, getScore, getIcon
 const playerFactory = (name, icon, score=0) => {
   const getName = () => name;
   const getIcon = () => icon;
@@ -10,17 +11,24 @@ const playerFactory = (name, icon, score=0) => {
   let record = []
 
   const winRound = () => { score += 1 }
-  const checkWin = () => {
-    if ( winRound.includes(record[-1])) {
-      winRound();
-      return true;
-    } else { return false }
+  const checkWin = (check) => {
+      let win = false;
+      while (!win){
+        for(let value of winRoundCheck){
+          let num = 0;
+          if(value.forEach(element => {
+            check.includes(element)? num +=1:false;
+          }));
+          num===3? win=true: false;
+        }
+      } if (win) { winRound()}
+      return win;
   }
   const recordMove = play => {
     record[-1].push(play);
     if (record[-1].length >= 3 ){
       record[-1].sort();
-      return checkWin();
+      return checkWin(record[-1]);
     } else { return false }
   }
   const resetPlayer = () => {
