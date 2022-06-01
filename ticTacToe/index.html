@@ -36,13 +36,18 @@
       </div>
       <div id="get-players" class="modal hidden">
         <h1>Who is playing Tic-Tac-Toe today?</h1>
-        <form id="player-form" class="get-players" action="index.html" method="post">
-          <label for="player1-name">Player 1's Name:</label>
-          <input type="text" name="player1-name" value="">
+          <form id="player-1-info">
+            <label for="player1-name">Player 1's Name:</label>
+            <input type="text" name="player1-name" value="">
+          </form>
+          <form id="player-2-info" class="hidden">
           <label for="player2-name">Player 2's Name:</label>
           <input type="text" name="player2-name" value="">
+          </form>
+          <div id="icon-choices">
+            <img src=""
+          </div>
           <button type="submit" id='submit-button' name="submit-button">Start Playing</button>
-        </form>
       </div>
       <div class="modal hidden" id="play-again">
         <h1 id="winner"><span id='round-winner'>Player?</span> Wins the Round!</h1>
