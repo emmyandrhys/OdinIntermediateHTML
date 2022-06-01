@@ -74,7 +74,7 @@ const p2nameHeader = document.getElementById('player-2-name');
 const p1scoreHeader = document.getElementById('player-1-score');
 const p2scoreHeader = document.getElementById('player-2-score');
 const getPlayersModal = document.getElementById('get-players');
-const form = document.getElementById('player-form');
+const form = document.getElementById('submit-button');
 const SubmitButton = document.getElementById('submit-button')
 const playAgainModal = document.getElementById('play-again')
 const finalScoreModal = document.getElementById('final-score-modal');
@@ -137,8 +137,9 @@ const gameBoard = (() => {
       let formData = document.getElementById('player-form').elements;
       //get player names and icons
       let player1name = formData[0].value;
-      let player1icon = formData[1].value;
       let player2name = formData[2].value;
+      
+      let player1icon = formData[1].value;
       let player2icon = formData[3].value;
       //create player objects
       const player1 = playerFactory(player1name, player1icon, 0);
@@ -155,3 +156,37 @@ const gameBoard = (() => {
 })();
 gameBoard.buildBoard(board);
 newGame()
+
+const iconList = [
+  {id: "chicken-head", source: "./assets/chicken-head.svg"},
+  {id: "chicken", source: "./assets/chicken.svg"},
+  {id: "ChickenHead", source: "./assets/ChickenHead.svg"},
+  {id: "ColorfulRooster", source: "./assets/ColorfulRooster.svg"},
+  {id: "Cute_chick", source: "./assets/Cute_chick.svg"},
+  {id: "drawing", source: "./assets/drawing.svg"},
+  {id: "eggscape", source: "./assets/eggscape.svg"},
+  {id: "eggstracute", source: "./assets/eggstracute.svg"},
+  {id: "FancyEggChick", source: "./assets/FancyEggChick.svg"},
+  {id: "FancyFloralEgg", source: "./assets/FancyFloralEgg.svg"},
+  {id: "FancyMandalaEgg", source: "./assets/FancyMandalaEgg.svg"},
+  {id: "HatchedChick", source: "./assets/HatchedChick.svg"},
+  {id: "HatchingChickSide", source: "./assets/HatchingChickSide.svg"},
+  {id: "Hen", source: "./assets/Hen.svg"},
+  {id: "rooster", source: "./assets/rooster.svg"},
+  {id: "ThreeEggs", source: "./assets/ThreeEggs.svg"},
+]
+//icon choice modal builder
+const iconChoices = () => {
+  let iconArea = document.getElementById('icon-choices');
+  iconList.forEach(n => {
+    let icon = document.createElement('img');
+    icon.classList.add('icon-img');
+    icon.setAttribute('id', `${n[id]}`);
+    icon.setAttribute('src', n[source])
+    //eventlisteners to each icon
+    icon.addEventListener('click', iconSelection);
+    iconChoices.appendChild(icon);
+  })
+};
+
+//function to determine selected icons
