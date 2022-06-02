@@ -74,7 +74,10 @@ const p2nameHeader = document.getElementById('player-2-name');
 const p1scoreHeader = document.getElementById('player-1-score');
 const p2scoreHeader = document.getElementById('player-2-score');
 const getPlayersModal = document.getElementById('get-players');
-const form = document.getElementById('submit-button');
+const form = document.getElementById('player-form');
+const player1Form = document.getElementById('player1-info');
+const player2Form = document.getElementById('player2-info');
+
 const SubmitButton = document.getElementById('submit-button')
 const playAgainModal = document.getElementById('play-again')
 const finalScoreModal = document.getElementById('final-score-modal');
@@ -132,11 +135,27 @@ const gameBoard = (() => {
   const newGame = () => {
     //display modal
     getPlayersModal.classList.remove('noshow');
+    let icons = iconArea.children;
+      for (let icon of icons){
+        icon.addEventListener('click', iconSelection)
+      }
     //add eventlistener
-    form.addEventListener('click', function formInput() {
+    SubmitButton.addEventListener('click', function player1form () {
       let formData = document.getElementById('player-form').elements;
-      //get player names and icons
+      //get player1 name and icon
       let player1name = formData[0].value;
+      let player1icon = 
+      iconList.forEach(n => {
+        let icon = document.createElement('img');
+        icon.classList.add('icon-img');
+        icon.setAttribute('id', `${n[id]}`);
+        icon.setAttribute('src', n[source])
+        //eventlisteners to each icon
+        icon.addEventListener('click', iconSelection);
+        iconChoices.appendChild(icon);
+      })
+      
+      
       let player2name = formData[2].value;
       
       let player1icon = formData[1].value;
@@ -175,16 +194,15 @@ const iconList = [
   {id: "rooster", source: "./assets/rooster.svg"},
   {id: "ThreeEggs", source: "./assets/ThreeEggs.svg"},
 ]
+let iconArea = document.getElementById('icon-choices');
+
 //icon choice modal builder
 const iconChoices = () => {
-  let iconArea = document.getElementById('icon-choices');
   iconList.forEach(n => {
     let icon = document.createElement('img');
     icon.classList.add('icon-img');
     icon.setAttribute('id', `${n[id]}`);
     icon.setAttribute('src', n[source])
-    //eventlisteners to each icon
-    icon.addEventListener('click', iconSelection);
     iconChoices.appendChild(icon);
   })
 };
