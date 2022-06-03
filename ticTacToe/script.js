@@ -62,7 +62,7 @@ const match = (e, turn) => {
       let square = e.target;
       let play = square.id;
     }
-//passes winner (or lack of) to game fucntion
+//passes winner (or lack of) to game function
 //game(player)
   }
 }
@@ -78,7 +78,8 @@ const form = document.getElementById('player-form');
 const player1Form = document.getElementById('player1-info');
 const player2Form = document.getElementById('player2-info');
 
-const SubmitButton = document.getElementById('submit-button')
+const Player1Button = document.getElementById('submit-button')
+const Player2Button = document.getElementById('start-game-button')
 const playAgainModal = document.getElementById('play-again')
 const finalScoreModal = document.getElementById('final-score-modal');
 const catGameModal = document.getElementById('cat-game');
@@ -131,44 +132,58 @@ const gameBoard = (() => {
       square.appendChild(playerTwo);
     })
   };
+
+  //icon selection variable
+  let selected = null;
+  const iconWarning = document.getElementById('icon-warning')
+
   //new game modal function
   const newGame = () => {
     //display modal
     getPlayersModal.classList.remove('noshow');
     let icons = iconArea.children;
       for (let icon of icons){
-        icon.addEventListener('click', iconSelection)
+        icon.addEventListener('click', (e)=>{
+          selected = e.target.id
+        })
       }
-    //add eventlistener
-    SubmitButton.addEventListener('click', function player1form () {
+    //add eventlistener to Player-1-button
+    Player1Button.addEventListener('click', function player1form () {
       let formData = document.getElementById('player-form').elements;
       //get player1 name and icon
       let player1name = formData[0].value;
-      let player1icon = 
-      iconList.forEach(n => {
-        let icon = document.createElement('img');
-        icon.classList.add('icon-img');
-        icon.setAttribute('id', `${n[id]}`);
-        icon.setAttribute('src', n[source])
-        //eventlisteners to each icon
-        icon.addEventListener('click', iconSelection);
-        iconChoices.appendChild(icon);
-      })
-      
-      
-      let player2name = formData[2].value;
-      
-      let player1icon = formData[1].value;
-      let player2icon = formData[3].value;
-      //create player objects
-      const player1 = playerFactory(player1name, player1icon, 0);
-      const player2 = playerFactory(player2name, player2icon, 0);
-      //add images of html of board
-      squareImages(player1, player2)
-      //call game fucntion
-      game(player1, player2)
-      //hideModal(getPlayersModal);
-      getPlayersModal.classList.add('noshow');
+      //if icon not selected throw warning
+      if(selected === null){
+        iconWarning.classList.remove('noshow');
+        document.getElementById('icon-warning.btn').addEventListener('click', ()=>{iconWarning.classList.add('noshow')})
+        return;
+      } //if icon selected construct player1 and display player 2 form
+      else {
+        let player1icon = selected;
+        const player1 = playerFactory(player1name, player1icon)
+        document.getElementById(player1icon).classList.add('grayscale')
+        player1Form.classList.add('noshow');
+        Player1Button.classList.add('noshow');
+        player2Form.classList.remove('noshow');
+        Player2Button.classList.remove('noshow');
+        return player1;
+      }
+    })
+    //add event listener to player2 button
+    Player2Button.addEventListener('click', function player2form(){
+      let formData = document.getElementById('player-form').elements;
+      //get player2 name and icon
+      let player2name = formData[1].value;
+      //if icon selected matches player1 icon, throw warning
+      if(selected === player1.getIcon) {
+        iconWarning.classList.remove('noshow');
+      } //if icon selected is different from player1, construct player2 and hide modal
+      else {
+        let player2icon = selected;
+        const player2 = playerFactory(player2name, player2icon);
+        getPlayersModal.classList.add('noshow');
+        return player2;
+      }
     })   
   }
   return {buildBoard, newGame, }
