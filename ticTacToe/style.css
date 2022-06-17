@@ -53,6 +53,9 @@ body {
   border: .5rem solid #DDDDDD;
 }
 .modal {
-    display: none;
+    display: inline;
     background-color: #B02E0C;
+}
+.noshow {
+  display: none;
 }
